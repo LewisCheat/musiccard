@@ -54,19 +54,19 @@ window.addEventListener("load", () => {
   initTheme(); 
 });
 
-// File: script.js
+// File: script.js (Tìm và thay thế hàm loadMusic)
 
-// Load music details (CẬP NHẬT)
-function loadMusic(index) {
-  const song = allMusic[index]; 
-  musicName.innerText = song.name;
-  musicArtist.innerText = song.artist;
-  
-  // SỬA LỖI CỐT LÕI: Gán TRỰC TIẾP URL Imgur/GIF vào src
-  // (Đã xóa `images/` và `.gif` ở hai đầu)
-  musicImg.src = song.img; 
-  
-  mainAudio.src = song.src; 
+function loadMusic(indexNumb){
+    // ... (các dòng khai báo biến)
+    musicName.innerText = allMusic[indexNumb].name;
+    musicArtist.innerText = allMusic[indexNumb].artist;
+    
+    // DÒNG CODE CẦN SỬA: Chỉ gán trực tiếp URL vào src
+    // Đã xóa phần: `images/${...}.jpg`
+    musicImg.src = allMusic[indexNumb].img; 
+    
+    mainAudio.src = allMusic[indexNumb].src;
+    // ...
 }
 
 // Play music
@@ -343,7 +343,6 @@ function loadGenreList() {
             </li>`;
         genreUlTag.insertAdjacentHTML("beforeend", liTag);
     });
-    
     // Thêm event listener cho từng thể loại
     genreUlTag.querySelectorAll("li").forEach(li => {
         li.addEventListener("click", () => {
@@ -351,6 +350,29 @@ function loadGenreList() {
             loadMusicListForGenre(parseInt(index));
         });
     });
+}
+// File: script.js
+
+// Hàm Tải danh sách Thể loại
+function loadGenreList() {
+    genreUlTag.innerHTML = ""; // Xóa các mục cũ
+    
+    // allGenres.forEach( (genre, i) => { ... } )
+    // Hoặc dùng vòng lặp for thông thường
+    for (let i = 0; i < allGenres.length; i++) {
+        const genre = allGenres[i];
+        
+        // ĐÃ SỬA: Thêm `onclick="loadMusicListForGenre(${i})"` vào thẻ <li>
+        const liTag = `
+            <li data-genre="${genre.genre}" onclick="loadMusicListForGenre(${i})">
+              <div class="row">
+                <span>${genre.genre}</span>
+                <p>(${genre.songs.length} bài)</p> 
+              </div>
+            </li>`;
+            
+        genreUlTag.insertAdjacentHTML("beforeend", liTag);
+    }
 }
 
 // Chuyển sang Music List Panel và tải bài hát của thể loại được chọn
