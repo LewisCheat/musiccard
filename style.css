@@ -71,11 +71,15 @@ body, * {
 
 /* ------------------ GLOBAL STYLES ------------------ */
 
+/* File: style.css (Đoạn đầu file, trong thẻ body) */
+
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+    /* Thêm 3 dòng này để căn giữa tuyệt đối */
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    min-height: 100vh;
+    /* ... giữ nguyên các thuộc tính khác (background, v.v.) ... */
   /* Gradient nền rực rỡ hơn */
   background: linear-gradient(135deg, #a7a7ff 0%, #ffc0c0 100%);
   padding: 0 15px;
@@ -114,13 +118,16 @@ body {
 }
 
 
+/* File: style.css */
+
+/* Tìm và thay thế lớp .wrapper (hoặc kiểm tra) */
 .wrapper {
-  width: 380px;
-  max-width: 100%;
-  padding: 25px 30px;
-  overflow: hidden;
-  position: relative;
-  border-radius: 20px; 
+  /* ... (Các thuộc tính khác giữ nguyên) ... */
+  max-width: 420px; 
+  width: 90%; 
+  overflow: hidden; /* Quan trọng để cắt các cạnh nếu ảnh có border-radius */
+  border-radius: 15px; /* Giả sử đây là border-radius của card */
+  position: relative; 
   background: var(--white);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
   z-index: 10; 
@@ -246,6 +253,36 @@ body {
   object-fit: cover;
 }
 
+/* TÌM VÀ THAY THẾ TOÀN BỘ ĐOẠN CSS CHO .img-area */
+.wrapper .img-area {
+  /* 1. XÓA BỎ bo tròn (50%) */
+  border-radius: 10px; /* Bo góc nhẹ cho hình chữ nhật */
+  
+  /* 2. KÉO DÀI RA VỪA KHUNG CARD */
+  height: 200px; /* Đặt chiều cao mong muốn (có thể thay đổi) */
+  width: 100%; /* Chiếm toàn bộ chiều rộng của .wrapper */
+  
+  /* 3. Đảm bảo ảnh không tràn ra ngoài */
+  overflow: hidden; 
+  padding: 0; /* Xóa padding không cần thiết */
+  margin-top: 25px; 
+
+  /* Giữ nguyên hiệu ứng Box Shadow (tùy chọn) */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); 
+}
+
+/* TÌM VÀ THAY THẾ TOÀN BỘ ĐOẠN CSS CHO .img-area img */
+.wrapper .img-area img {
+  width: 100%;
+  height: 100%;
+  
+  /* QUAN TRỌNG: Đảm bảo ảnh lấp đầy khung hình chữ nhật và giữ tỷ lệ */
+  object-fit: cover; 
+  
+  /* Xóa bỏ bo tròn nếu có */
+  border-radius: 0; 
+  transition: all 0.2s ease-out;
+}
 /* ------------------ SONG DETAILS (CHỮ) ------------------ */
 
 .song-details {
@@ -924,3 +961,87 @@ ul li.playing {
     50% { box-shadow: 0px 8px 15px rgba(140, 123, 255, 0.8); }
     100% { box-shadow: 0px 5px 10px rgba(255, 110, 135, 0.4); }
 }
+
+/* File: style.css (Thêm vào cuối file) */
+
+/* --------------------------------------------------- */
+/* @MEDIA QUERIES - TỐI ƯU CHO ĐIỆN THOẠI (Dưới 500px) */
+/* --------------------------------------------------- */
+@media (max-width: 500px) {
+    /* 1. Thay đổi kích thước và padding chung */
+    .wrapper {
+        width: 95%; /* Chiếm gần hết chiều rộng màn hình */
+        padding: 20px 15px; /* Giảm padding ngang để có thêm không gian */
+        /* Chiều cao tự động (auto) hoặc cố định nếu cần */
+        /* height: 95vh; */ 
+    }
+
+    /* 2. Điều chỉnh vùng ảnh (Image Area) */
+    .img-area {
+        height: 200px; /* Giảm kích thước ảnh */
+        width: 200px;
+        margin-top: 15px; 
+    }
+
+    /* 3. Giảm kích thước các nút điều khiển */
+    .controls i {
+        font-size: 32px; /* Giảm kích thước icon */
+    }
+
+    .controls .play-pause {
+        height: 60px; /* Giảm kích thước nút Play/Pause */
+        width: 60px;
+    }
+
+    /* 4. Tối ưu hóa Music List/Genre List */
+    .music-list-container {
+        /* Đảm bảo container này có thể trượt lên toàn màn hình */
+        /* Chiều cao 100% hoặc 90% nếu bạn có footer cố định */
+        height: 100vh; 
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        border-radius: 0; /* Bỏ border-radius trên mobile */
+    }
+    
+    /* Đảm bảo các mục trong danh sách có khoảng cách tốt */
+    .music-list ul li {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+}
+
+/* File: style.css (Thêm vào cuối file) */
+
+/* --------------------------------------------------- */
+/* @MEDIA QUERIES - TỐI ƯU CHO PC/LAPTOP (Trên 1024px) */
+/* --------------------------------------------------- */
+@media (min-width: 1024px) {
+    /* (Tùy chọn) Có thể tăng nhẹ kích thước wrapper nếu bạn muốn player lớn hơn */
+    .wrapper {
+        max-width: 450px; /* Vẫn giữ nó là widget, nhưng rộng hơn mobile một chút */
+        padding: 30px 40px; 
+    }
+
+    /* Tăng nhẹ kích thước ảnh */
+    .img-area {
+        height: 230px; 
+        width: 230px;
+        margin-top: 20px;
+    }
+    
+    /* Căn chỉnh lại Music List Container trên PC */
+    .music-list-container {
+        /* Đảm bảo nó không chiếm hết chiều cao màn hình PC */
+        max-height: 85vh; 
+        max-width: 480px; /* Rộng hơn wrapper một chút */
+        
+        /* Đảm bảo nó được căn giữa theo wrapper */
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%); 
+        border-radius: 15px 15px 0 0; 
+    }
+}
+
+/* File: style.css */
