@@ -169,31 +169,16 @@ function formatTime(timeInSeconds) {
         return `${formattedMinutes}:${formattedSeconds}`;
     }
 }
-// File: script.js (Tìm và sửa đoạn xử lý progressArea)
+// Seek through the progress bar
+progressArea.addEventListener("click", (e) => {
+  const progressWidth = progressArea.clientWidth;
+  const clickedOffsetX = e.offsetX;
+  mainAudio.currentTime = (clickedOffsetX / progressWidth) * mainAudio.duration;
+  playMusic();
+  updatePlayingSong();
 
-progressArea.addEventListener("click", updateProgress); 
-// THÊM: Xử lý khi chạm vào (Tối ưu cho điện thoại)
-progressArea.addEventListener("touchstart", (e) => {
-    // Ngăn chặn hành vi mặc định của trình duyệt
-    e.preventDefault(); 
-    // Gọi hàm xử lý tiến trình (nhận thông tin vị trí chạm từ touch events)
-    updateProgress(e.touches[0]); 
+
 });
-
-// Sửa lại hàm updateProgress để nó có thể nhận cả Mouse Event và Touch Event
-function updateProgress(e) {
-    // Lấy offsetX (vị trí click chuột) hoặc clientX (vị trí chạm)
-    let clientX = e.clientX || e.touches[0].clientX; 
-    
-    // Tính toán lại vị trí click/touch dựa trên vị trí của progressArea
-    let progressWidthVal = progressArea.clientWidth; 
-    let clickedOffSetX = clientX - progressArea.getBoundingClientRect().left; 
-    
-    // ... (Giữ nguyên logic tính thời gian và gán currentTime) ...
-    
-    mainAudio.currentTime = clickedOffSetX / progressWidthVal * mainAudio.duration;
-    playMusic(); // Chơi nhạc sau khi thay đổi tiến trình
-}
 
 // Repeat/shuffle button event
 repeatBtn.addEventListener("click", () => {
