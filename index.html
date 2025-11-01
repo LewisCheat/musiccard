@@ -92,37 +92,6 @@
 
     <script src="js/music-list.js"></script>
     <script src="js/script.js"></script>
-    <script>
-        function createSnowflake() {
-            const container = document.querySelector('.snow-container');
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            
-            // Random kích thước và vị trí
-            const size = Math.random() * 5 + 2; 
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-            snowflake.style.left = `${Math.random() * 100}vw`;
-            
-            // Random thời gian rơi và độ trễ
-            snowflake.style.animationDuration = `${Math.random() * 10 + 5}s`; 
-            snowflake.style.animationDelay = `${Math.random() * 5}s`;
-
-            container.appendChild(snowflake);
-
-            // Xóa hạt tuyết sau khi nó rơi hết để tiết kiệm bộ nhớ
-            snowflake.addEventListener('animationend', () => {
-                snowflake.remove();
-            });
-        }
-
-        // Tạo 50-100 hạt tuyết
-        for (let i = 0; i < 70; i++) {
-            createSnowflake();
-        }
-
-        // Tạo thêm tuyết liên tục
-        setInterval(createSnowflake, 500);
-    </script>
 </body>
+
 </html>
